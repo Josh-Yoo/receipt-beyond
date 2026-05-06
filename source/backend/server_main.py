@@ -8,6 +8,7 @@ from model.user import User
 from resource.resource_user import auth_bp
 from resource.resource_receipt import receipts_bp
 from resource.resource_summary import summary_bp
+import json
 
 
 # Initialize LoginManager

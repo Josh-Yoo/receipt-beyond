@@ -1,5 +1,4 @@
 import os
-import json
 
 class Config:
     #Flask session security
