@@ -68,10 +68,15 @@ def hello():
     return "Hello and welcome to the Receipt Plus API!"
 
 # Initialize firebase admin SDK app
-firebase_config = json.loads(Config.FIREBASE_CREDENTIALS)
-cred = credentials.Certificate(firebase_config)
-initialize_app(cred)
-app.db = firestore.client()
+firebase_raw = Config.FIREBASE_CREDENTIALS
+if firebase_raw:
+
+    firebase_config = json.loads(firebase_raw)
+    cred = credentials.Certificate(firebase_config)
+    initialize_app(cred)
+    app.db = firestore.client()
+else:
+    app.db = None
 
 # Flask-Login config
 login_manager.init_app(app)

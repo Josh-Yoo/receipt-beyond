@@ -45,7 +45,6 @@ jobs:
     - name: Test with pytest
       env: 
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
       run: |
         export PYTHONPATH=source/backend
         pytest
