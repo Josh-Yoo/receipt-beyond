@@ -67,7 +67,7 @@ def hello():
     return "Hello and welcome to the Receipt Plus API!"
 
 # Initialize firebase admin SDK app
-cred = credentials.Certificate(app.config['FIRESTORE_KEY'])
+cred = credentials.Certificate(app.config['FIREBASE_CREDENTIALS'])
 initialize_app(cred)
 app.db = firestore.client()
 
