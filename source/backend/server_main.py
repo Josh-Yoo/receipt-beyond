@@ -67,7 +67,7 @@ app.register_blueprint(summary_bp, url_prefix='/api')
 def hello():
     return "Hello and welcome to the Receipt Plus API!"
 
-# Initialize firebase admin SDK app
+# Initialize firebase admin SDK app 
 firebase_config = json.loads(Config.FIREBASE_CREDENTIALS)
 cred = credentials.Certificate(firebase_config)
 initialize_app(cred)
