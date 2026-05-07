@@ -49,20 +49,22 @@ jobs:
       run: |
         export PYTHONPATH=source/backend
         pytest
-    - name: Setup SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Add known hosts
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
-    - name: Set fetch depth
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Deploy to PythonAnywhere
-      if: github.ref == 'refs/heads/main' && job.status == 'success'
-      run: |
-        git remote add pythonanywhereRP receiptplus@ssh.pythonanywhere.com:/home/receiptplus/receipt_plus/receipt_plus.git
-        git push -u pythonanywhereRP main -f
+
+    #- name: Setup SSH
+    #  uses: webfactory/ssh-agent@v0.5.3
+    #  with:
+    #    ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    #- name: Add known hosts
+    #  run: |
+    #    mkdir -p ~/.ssh
+    #    echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+
+    #- name: Set fetch depth
+    #  uses: actions/checkout@v2
+    #  with:
+    #    fetch-depth: 0
+    #- name: Deploy to Render
+    #  if: github.ref == 'refs/heads/main' && job.status == 'success'
+    #  run: |
+    #    git remote add pythonanywhereRP receiptplus@ssh.pythonanywhere.com:/home/receiptplus/receipt_plus/receipt_plus.git
+    #    git push -u pythonanywhereRP main -f
