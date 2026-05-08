@@ -58,6 +58,7 @@ export class UserValid extends Component<UserValidProps, UserValidState> {
         address: receiptData.location,
         date: receiptData.receipt_date,
         total: receiptData.total ?? "", // Set to empty if total is null
+        // Need to check some edge cases such as new user adding a receipt
         items: (receiptData.purchases ?? []).map((purchase: any) => ({
           name: purchase.name,
           price: purchase.price,
