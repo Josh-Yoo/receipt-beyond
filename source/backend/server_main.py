@@ -8,6 +8,7 @@ from model.user import User
 from resource.resource_user import auth_bp
 from resource.resource_receipt import receipts_bp
 from resource.resource_summary import summary_bp
+import json
 
 
 # Initialize LoginManager
@@ -67,7 +68,8 @@ def hello():
     return "Hello and welcome to the Receipt Plus API!"
 
 # Initialize firebase admin SDK app
-cred = credentials.Certificate(app.config['FIRESTORE_KEY'])
+firebase_config = json.loads(Config.FIREBASE_CREDENTIALS)
+cred = credentials.Certificate(firebase_config)
 initialize_app(cred)
 app.db = firestore.client()
 

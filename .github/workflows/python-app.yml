@@ -28,12 +28,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Set up config.py
-      env:
-        CONFIG_CONTENT: ${{ secrets.CONFIG_CONTENT }}
-      run: |
-        # Save the content of config.py to a file
-        echo "$CONFIG_CONTENT" > source/backend/config.py
+  
+    #- name: Set up config.py
+    #  env:
+    #    CONFIG_CONTENT: ${{ secrets.CONFIG_CONTENT }}
+    #  run: |
+    #    # Save the content of config.py to a file
+    #    echo "$CONFIG_CONTENT" > source/backend/config.py
 
     - name: Lint with flake8
       run: |
@@ -42,23 +43,28 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
+      env: 
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        FIREBASE_CREDENTIALS: ${{secrets.FIREBASE_CREDENTIALS}}
       run: |
         export PYTHONPATH=source/backend
         pytest
-    - name: Setup SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Add known hosts
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
-    - name: Set fetch depth
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Deploy to PythonAnywhere
-      if: github.ref == 'refs/heads/main' && job.status == 'success'
-      run: |
-        git remote add pythonanywhereRP receiptplus@ssh.pythonanywhere.com:/home/receiptplus/receipt_plus/receipt_plus.git
-        git push -u pythonanywhereRP main -f
+
+    #- name: Setup SSH
+    #  uses: webfactory/ssh-agent@v0.5.3
+    #  with:
+    #    ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    #- name: Add known hosts
+    #  run: |
+    #    mkdir -p ~/.ssh
+    #    echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+
+    #- name: Set fetch depth
+    #  uses: actions/checkout@v2
+    #  with:
+    #    fetch-depth: 0
+    #- name: Deploy to Render
+    #  if: github.ref == 'refs/heads/main' && job.status == 'success'
+    #  run: |
+    #    git remote add pythonanywhereRP receiptplus@ssh.pythonanywhere.com:/home/receiptplus/receipt_plus/receipt_plus.git
+    #    git push -u pythonanywhereRP main -f
