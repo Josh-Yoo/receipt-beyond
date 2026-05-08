@@ -1,5 +1,5 @@
 import {View, TouchableOpacity } from "react-native";
-import React, { Component } from "react";
+import React, { Component, JSX } from "react";
 import {
   Spacer,
   StyledContainer,
@@ -92,7 +92,7 @@ export class Account extends Component<AccountProps, AccountState> {
   };
 
   fetchUserData = () => {
-    fetch("https://receiptplus.pythonanywhere.com/api/user_info", {
+    fetch("https://receipt-beyond.onrender.com/api/user_info", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

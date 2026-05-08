@@ -1,5 +1,5 @@
 import { Text, View, Button, TouchableOpacity } from "react-native";
-import React, { Component } from "react";
+import React, { Component, JSX } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import { AuthStackParamList } from "../app/StackParamList";
@@ -230,7 +230,7 @@ export class SignUp extends Component<SignUpProps, SignUpState> {
         email: this.state.email,
         date: currDate,
       };
-      fetch("https://receiptplus.pythonanywhere.com/api/register", {
+      fetch("https://receipt-beyond.onrender.com/api/register", {
         method: "POST",
         body: JSON.stringify(args),
         headers: { "Content-Type": "application/json" },

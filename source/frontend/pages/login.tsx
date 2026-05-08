@@ -1,5 +1,5 @@
 import {View, Button } from "react-native";
-import React, { Component } from "react";
+import React, { Component, JSX } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import { AuthStackParamList } from "../app/StackParamList";
@@ -167,7 +167,7 @@ export class Login extends Component<LoginProps, LoginState> {
         password: this.state.password,
       };
 
-      fetch("https://receiptplus.pythonanywhere.com/api/login", {
+      fetch("https://receipt-beyond.onrender.com/api/login", {
         method: "POST",
         body: JSON.stringify(args),
         headers: { "Content-Type": "application/json" },

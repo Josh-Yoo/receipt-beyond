@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { NavigationProp, RouteProp } from "@react-navigation/native";
 import { CaptureStackParamList } from "../app/StackParamList";
-import { AutoFocus, Camera, CameraType } from "expo-camera/legacy";
+import {CameraView, Camera} from "expo-camera";
 import { State, TapGestureHandler } from "react-native-gesture-handler";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Colors } from "@/components/style";
@@ -30,7 +30,7 @@ interface CaptureState {
 }
 
 export class Capture extends Component<CaptureProps, CaptureState> {
-  cameraRef = createRef<Camera>();
+  cameraRef = createRef<CameraView>();
 
   constructor(props: CaptureProps) {
     super(props);
@@ -82,7 +82,7 @@ export class Capture extends Component<CaptureProps, CaptureState> {
 
       try {
         const response = await fetch(
-          "https://receiptplus.pythonanywhere.com/api/receipts_parsing",
+          "https://receipt-beyond.onrender.com/api/receipts_parsing",
           {
             method: "POST",
             body: formData, // Send the formData
@@ -97,7 +97,7 @@ export class Capture extends Component<CaptureProps, CaptureState> {
         // Assuming 'data' is the parsed receipt information
         this.props.navigation.navigate("UserValid", {
           receiptData: data, // Pass the parsed data to the next screen
-          // onReturnToCamera: this.resetCamera,
+          onReturnToCamera: this.resetCamera,
         });
         this.resetCamera();
       } catch (error) {
@@ -189,11 +189,11 @@ export class Capture extends Component<CaptureProps, CaptureState> {
               }}
               shouldCancelWhenOutside={false}
             >
-              <Camera
+              <CameraView
                 ref={this.cameraRef}
                 style={styles.camera}
-                type={CameraType.back}
-                autoFocus={isRefreshing ? AutoFocus.off : AutoFocus.on}
+                facing={"back"}
+                //autoFocus={isRefreshing ? AutoFocus.off : AutoFocus.on}
                 //   onTouchEnd={this.onTapToFocus} // Handle touch to set focus point
               >
                 {focusSquare.visible && (
@@ -213,7 +213,7 @@ export class Capture extends Component<CaptureProps, CaptureState> {
                     <View style={styles.innerCircle}></View>
                   </TouchableOpacity>
                 </View>
-              </Camera>
+              </CameraView>
             </TapGestureHandler>
           </GestureHandlerRootView>
         )}

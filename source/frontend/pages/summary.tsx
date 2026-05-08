@@ -1,5 +1,5 @@
 import { Text, View, Dimensions } from "react-native";
-import React, { Component } from "react";
+import React, { Component, JSX } from "react";
 import { PieChart } from "react-native-chart-kit";
 import {
   VictoryChart,
@@ -209,7 +209,7 @@ export class Summary extends Component<SummaryProps, SummaryState> {
     this.setState({ month: monthName, date: currDate });
 
     const args = { date: "2024-10-30" };
-    fetch("https://receiptplus.pythonanywhere.com/api/month_cat_exp", {
+    fetch("https://receipt-beyond.onrender.com/api/month_cat_exp", {
       method: "POST",
       body: JSON.stringify(args),
       headers: { "Content-Type": "application/json" },
@@ -220,7 +220,7 @@ export class Summary extends Component<SummaryProps, SummaryState> {
         console.error("Error fetching api/month_cat_exp");
       });
 
-    fetch("https://receiptplus.pythonanywhere.com/api/month_exp", {
+    fetch("https://receipt-beyond.onrender.com/api/month_exp", {
       method: "POST",
       body: JSON.stringify(args),
       headers: { "Content-Type": "application/json" },

@@ -40,7 +40,7 @@ export class History extends Component<HistoryProps, HistoryState> {
   fetchDateBrackets = async () => {
     try {
       const response = await fetch(
-        "https://receiptplus.pythonanywhere.com/api/receipt_date_brackets",
+        "https://receipt-beyond.onrender.com/api/receipt_date_brackets",
         {
           method: "GET",
           credentials: "include",
