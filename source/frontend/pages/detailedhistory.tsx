@@ -42,7 +42,7 @@ export class DetailedHistory extends Component<
     const { year_month } = this.props.route.params;
     try {
       const response = await fetch(
-        `https://receiptplus.pythonanywhere.com/api/get_receipts`,
+        "https://receipt-beyond.onrender.com/api/get_receipts",
         {
           method: "POST",
           headers: {

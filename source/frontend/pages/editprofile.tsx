@@ -2,7 +2,7 @@ import { Text, View, TouchableOpacity, Modal } from "react-native";
 // Future: Adding the blur
 // npx expo install expo-blur
 // import { BlurView } from "expo-blur";
-import React, { Component } from "react";
+import React, { Component, JSX } from "react";
 import { Octicons } from "@expo/vector-icons";
 import { NavigationProp, RouteProp } from "@react-navigation/native";
 import { AccountStackParamList } from "@/app/StackParamList";
@@ -290,13 +290,13 @@ export class EditProfile extends Component<EditProfileProps, EditProfileState> {
 
       if (this.state.view === "email") {
         args = { new_email: this.state.newEmail };
-        url = "https://receiptplus.pythonanywhere.com/api/change_user_email";
+        url = "https://receipt-beyond.onrender.com/api/change_user_email";
       } else {
         args = {
           current_password: this.state.oldPassword,
           new_password: this.state.newPassword,
         };
-        url = "https://receiptplus.pythonanywhere.com/api/change_user_password";
+        url = "https://receipt-beyond.onrender.com/api/change_user_password";
       }
 
       fetch(url, {

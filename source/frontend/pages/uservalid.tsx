@@ -1,5 +1,5 @@
 import { Text, View, TouchableOpacity, ScrollView, TextInput } from "react-native";
-import React, { Component } from "react";
+import React, { Component, JSX } from "react";
 import { NavigationProp, RouteProp } from "@react-navigation/native";
 import KeyboardAvoidingWrapper from "@/components/keyboardAvoidingWrapper";
 import {
@@ -58,7 +58,7 @@ export class UserValid extends Component<UserValidProps, UserValidState> {
         address: receiptData.location,
         date: receiptData.receipt_date,
         total: receiptData.total ?? "", // Set to empty if total is null
-        items: receiptData.purchases.map((purchase: any) => ({
+        items: (receiptData.purchases ?? []).map((purchase: any) => ({
           name: purchase.name,
           price: purchase.price,
           quantity: purchase.quantity,
@@ -355,7 +355,7 @@ export class UserValid extends Component<UserValidProps, UserValidState> {
         location: this.state.address,
         purchases: this.state.items,
       };
-      fetch("https://receiptplus.pythonanywhere.com/api/receipts", {
+      fetch("https://receipt-beyond.onrender.com/api/receipts", {
         method: "POST",
         body: JSON.stringify(args),
         headers: { "Content-Type": "application/json" },

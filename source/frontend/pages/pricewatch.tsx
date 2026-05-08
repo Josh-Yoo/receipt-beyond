@@ -231,7 +231,7 @@ export class PriceWatch extends Component<PriceWatchProps, PriceWatchState> {
   fetchItemList = () => {
     const args = { zip_code: this.state.zipCode };
 
-    fetch("https://receiptplus.pythonanywhere.com/api/get_items_by_zipcode", {
+    fetch("https://receipt-beyond.onrender.com/api/get_items_by_zipcode", {
       method: "POST",
       body: JSON.stringify(args),
       headers: { "Content-Type": "application/json" },
@@ -266,7 +266,7 @@ export class PriceWatch extends Component<PriceWatchProps, PriceWatchState> {
   fetchBarData = () => {
     const args = { zip_code: this.state.zipCode, item_name: this.state.item };
 
-    fetch("https://receiptplus.pythonanywhere.com/api/receipt_info", {
+    fetch("https://receipt-beyond.onrender.com/api/receipt_info", {
       method: "POST",
       body: JSON.stringify(args),
       headers: { "Content-Type": "application/json" },
